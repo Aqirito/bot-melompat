@@ -29,7 +29,7 @@ const config = {
 };
 
 const bot = mineflayer.createBot({ //creates a new bot from the config above
-  host: config.host, //imported from config
+  host: config.host, //im ported from config
   port: config.version, //imported from config
   username: config.username, //imported from config
   version: config.version //imported from config
@@ -44,6 +44,12 @@ bot.on('chat', (username, message) => {
   target = bot.players[username].entity
   let entity
   switch (message) {
+    case 'sleep':
+      goToSleep();
+      break
+    case 'wakeup':
+      wakeUp();
+      break
     case 'forward':
       bot.setControlState('forward', true)
       break
@@ -150,6 +156,40 @@ function nearestEntity (type) {
     }
   }
   return best
+}
+
+bot.on('sleep', () => {
+  bot.chat('Oyasuminasai!');
+});
+bot.on('wake', () => {
+  bot.chat('Ohayou Gozaimasu');
+});
+
+function goToSleep () {
+  const bed = bot.findBlock({
+    matching: block => bot.isABed(block)
+  });
+  if (bed) {
+    bot.sleep(bed, (err) => {
+      if (err) {
+        bot.chat(`Nemurenai yo!: ${err.message}`);
+      } else {
+        bot.chat("Watashi wa nemutte iru");
+      }
+    });
+  } else {
+    bot.chat('Chikaku no beddo wa arimasen');
+  }
+}
+
+function wakeUp () {
+  bot.wake((err) => {
+    if (err) {
+      bot.chat(`Me ga samenai.: ${err.message}`);
+    } else {
+      bot.chat('Okita');
+    }
+  });
 }
 
 bot.on("error", err => console.log(err)); //triggers when there's an error and logs it into the console
