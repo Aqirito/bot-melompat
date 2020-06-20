@@ -139,6 +139,13 @@ bot.on('dismount', (vehicle) => {
   bot.chat(`dismounted ${vehicle.objectType}`)
 })
 
+bot.on('sleep', () => {
+  bot.chat('Oyasuminasai!')
+})
+bot.on('wake', () => {
+  bot.chat('Ohayou Gozaimasu')
+})
+
 function nearestEntity (type) {
   let id
   let entity
@@ -157,13 +164,6 @@ function nearestEntity (type) {
   }
   return best
 }
-
-bot.on('sleep', () => {
-  bot.chat('Oyasuminasai!')
-})
-bot.on('wake', () => {
-  bot.chat('Ohayou Gozaimasu')
-})
 
 function goToSleep () {
   const bed = bot.findBlock({
