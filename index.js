@@ -50,6 +50,9 @@ bot.on('chat', (username, message) => {
     case 'back':
       bot.setControlState('back', true)
       break
+    case 'sleepy':
+      bot.setControlState('sleep', true)
+      break
     case 'left':
       bot.setControlState('left', true)
       break
