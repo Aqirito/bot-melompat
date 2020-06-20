@@ -44,12 +44,6 @@ bot.on('chat', (username, message) => {
   target = bot.players[username].entity
   let entity
   switch (message) {
-    case 'sleep':
-      goToSleep();
-      break
-    case 'wakeup':
-      wakeUp();
-      break
     case 'forward':
       bot.setControlState('forward', true)
       break
@@ -117,6 +111,12 @@ bot.on('chat', (username, message) => {
       break
     case 'yp':
       bot.chat(`Yaw ${bot.entity.yaw}, pitch: ${bot.entity.pitch}`)
+      break
+    case 'sleep':
+      goToSleep();
+      break
+    case 'wakeup':
+      wakeUp();
       break
   }
 })
