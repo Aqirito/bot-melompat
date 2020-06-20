@@ -37,12 +37,12 @@ const bot = mineflayer.createBot({ //creates a new bot from the config above
 
 console.log("Connecting..."); //logs "Connecting..." into the console
 
-let target = null
+//let target = null
 
 bot.on('chat', (username, message) => {
   if (username === bot.username) return
   target = bot.players[username].entity
-  let entity
+  //let entity
   switch (message) {
     case 'forward':
       bot.setControlState('forward', true)
