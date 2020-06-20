@@ -118,7 +118,16 @@ bot.on('chat', (username, message) => {
     case 'wakeup':
       wakeUp()
       break
+    case 'look me':
+      watchTarget()
+      break
   }
+})
+
+
+function watchTarget () {
+  if (!target) return
+  bot.lookAt(target.position.offset(0, target.height, 0))
 })
 
 bot.on('mount', () => {
