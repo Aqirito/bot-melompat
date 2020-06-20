@@ -112,12 +112,6 @@ bot.on('chat', (username, message) => {
     case 'yp':
       bot.chat(`Yaw ${bot.entity.yaw}, pitch: ${bot.entity.pitch}`)
       break
-    case 'sleep':
-      goToSleep();
-      break
-    case 'wakeup':
-      wakeUp();
-      break
   }
 })
 
@@ -157,6 +151,19 @@ function nearestEntity (type) {
   }
   return best
 }
+
+bot.on('chat', (username, message) => {
+  if (username === bot.username) return;
+  switch (message) {
+    case 'sleep':
+      goToSleep();
+      break;
+    case 'wakeup':
+      wakeUp();
+      break;
+  }
+});
+
 
 bot.on('sleep', () => {
   bot.chat('Oyasuminasai!');
