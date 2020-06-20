@@ -121,16 +121,6 @@ bot.on('chat', (username, message) => {
   }
 })
 
-bot.once('spawn', () => {
-  // keep your eyes on the target, so creepy!
-  setInterval(watchTarget, 50)
-
-  function watchTarget () {
-    if (!target) return
-    bot.lookAt(target.position.offset(0, target.height, 0))
-  }
-})
-
 bot.on('mount', () => {
   bot.chat(`mounted ${bot.vehicle.objectType}`)
 })
