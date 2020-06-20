@@ -50,9 +50,6 @@ bot.on('chat', (username, message) => {
     case 'back':
       bot.setControlState('back', true)
       break
-    case 'sleepy':
-      bot.setControlState('sleep', true)
-      break
     case 'left':
       bot.setControlState('left', true)
       break
@@ -115,6 +112,12 @@ bot.on('chat', (username, message) => {
     case 'yp':
       bot.chat(`Yaw ${bot.entity.yaw}, pitch: ${bot.entity.pitch}`)
       break
+    case 'sleep':
+      goToSleep()
+      break
+    case 'wakeup':
+      wakeUp()
+      break
   }
 })
 
@@ -155,50 +158,38 @@ function nearestEntity (type) {
   return best
 }
 
-bot.on('chat', (username, message) => {
-  if (username === bot.username) return;
-  switch (message) {
-    case 'sleep':
-      goToSleep();
-      break;
-    case 'wakeup':
-      wakeUp();
-      break;
-  }
-});
-
 bot.on('sleep', () => {
-  bot.chat('Oyasuminasai!');
-});
+  bot.chat('Oyasuminasai!')
+})
 bot.on('wake', () => {
-  bot.chat('Ohayou Gozaimasu');
-});
+  bot.chat('Ohayou Gozaimasu')
+})
 
 function goToSleep () {
   const bed = bot.findBlock({
     matching: block => bot.isABed(block)
-  });
+  })
   if (bed) {
     bot.sleep(bed, (err) => {
       if (err) {
-        bot.chat(`Nemurenai yo!: ${err.message}`);
+        bot.chat(`Nemurenai yo!: ${err.message}`)
       } else {
-        bot.chat("Watashi wa nemutte iru");
+        bot.chat("Watashi wa nemutte iru")
       }
-    });
+    })
   } else {
-    bot.chat('Chikaku no beddo wa arimasen');
+    bot.chat('Chikaku no beddo wa arimasen')
   }
 }
 
 function wakeUp () {
   bot.wake((err) => {
     if (err) {
-      bot.chat(`Me ga samenai.: ${err.message}`);
+      bot.chat(`Me ga samenai.: ${err.message}`)
     } else {
-      bot.chat('Okita');
+      bot.chat('Okita')
     }
-  });
+  })
 }
 
 
