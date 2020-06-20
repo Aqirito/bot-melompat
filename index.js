@@ -112,16 +112,12 @@ bot.on('chat', (username, message) => {
     case 'yp':
       bot.chat(`Yaw ${bot.entity.yaw}, pitch: ${bot.entity.pitch}`)
       break
-  }
-})
-
-bot.once('spawn', () => {
-  // keep your eyes on the target, so creepy!
-  setInterval(watchTarget, 50)
-
-  function watchTarget () {
-    if (!target) return
-    bot.lookAt(target.position.offset(0, target.height, 0))
+    case 'sleep':
+      goToSleep()
+      break
+    case 'wakeup':
+      wakeUp()
+      break
   }
 })
 
@@ -131,6 +127,13 @@ bot.on('mount', () => {
 
 bot.on('dismount', (vehicle) => {
   bot.chat(`dismounted ${vehicle.objectType}`)
+})
+
+bot.on('sleep', () => {
+  bot.chat('Oyasuminasai!')
+})
+bot.on('wake', () => {
+  bot.chat('Ohayou Gozaimasu')
 })
 
 function nearestEntity (type) {
@@ -152,52 +155,33 @@ function nearestEntity (type) {
   return best
 }
 
-bot.on('chat', (username, message) => {
-  if (username === bot.username) return;
-  switch (message) {
-    case 'sleep':
-      goToSleep();
-      break;
-    case 'wakeup':
-      wakeUp();
-      break;
-  }
-});
-
-
-bot.on('sleep', () => {
-  bot.chat('Oyasuminasai!');
-});
-bot.on('wake', () => {
-  bot.chat('Ohayou Gozaimasu');
-});
-
 function goToSleep () {
   const bed = bot.findBlock({
     matching: block => bot.isABed(block)
-  });
+  })
   if (bed) {
     bot.sleep(bed, (err) => {
       if (err) {
-        bot.chat(`Nemurenai yo!: ${err.message}`);
+        bot.chat(`Nemurenai yo!: ${err.message}`)
       } else {
-        bot.chat("Watashi wa nemutte iru");
+        bot.chat("Watashi wa nemutte iru")
       }
-    });
+    })
   } else {
-    bot.chat('Chikaku no beddo wa arimasen');
+    bot.chat('Chikaku no beddo wa arimasen')
   }
 }
 
 function wakeUp () {
   bot.wake((err) => {
     if (err) {
-      bot.chat(`Me ga samenai.: ${err.message}`);
+      bot.chat(`Me ga samenai.: ${err.message}`)
     } else {
-      bot.chat('Okita');
+      bot.chat('Okita')
     }
-  });
+  })
 }
+
 
 bot.on("error", err => console.log(err)); //triggers when there's an error and logs it into the console
 
