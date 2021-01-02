@@ -23,7 +23,7 @@ const mineflayer = require("mineflayer");
 
 const config = { 
   host: "aqirito.aternos.me", //mc.hypixel.net for example
-  port: 25565, //server port (leave it as is unless you know what you're doing!)
+  port: 49376, //server port (leave it as is unless you know what you're doing!)
   username: "pelompat", //username only for cracked/offline mode servers, email for premium
   version: false //version of the server (false = auto detect)
 };
